@@ -1,0 +1,9 @@
+/cookbooks/
+/vendor/
+
+.bundle
+.chef
+.vagrant
+
+*.lock
+

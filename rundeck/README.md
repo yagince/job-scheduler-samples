@@ -21,3 +21,6 @@ vagrant provision
 ## Open Rundeck
 
 open `http://localhost:4440` in your browser
+
+- id: admin
+- pass: admin

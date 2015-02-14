@@ -1,5 +1,9 @@
 # Rundeck Test
 
+## Rundeck version
+
+- `2.4.2-1-GA`
+
 ## Installation
 
 ```

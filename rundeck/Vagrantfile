@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
 
   config.vm.define :master do |master|
-    master.vm.network :forwarded_port, guest: 80, host: 8081
+    master.vm.network :forwarded_port, guest: 4440, host: 4440
     master.vm.network :private_network, ip: "192.168.0.10", virtualbox__intnet: "intnet"
 
     master.vm.provider :virtualbox do |vb|
@@ -21,16 +21,39 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     master.vm.provision :chef_solo do |chef|
       chef.cookbooks_path = ["./cookbooks/","./site-cookbooks/"]
+      chef.add_recipe "base_pkg"
+      chef.add_recipe "apt"
       chef.add_recipe "java"
+      chef.add_recipe "rundeck"
       chef.json = {
         java: {
-          install_flavor: "oracle",
-          jdk_version: "8",
-          oracle: {
-            accept_oracle_download_terms: true
-          },
+          install_flavor: "openjdk",
+          jdk_version: "7",
         }
       }
     end
+  end
+
+  config.vm.define :worker do |worker|
+    worker.vm.network :private_network, ip: "192.168.0.11", virtualbox__intnet: "intnet"
+
+    worker.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+    end
+
+    # worker.vm.provision :chef_solo do |chef|
+    #   chef.cookbooks_path = ["./cookbooks/","./site-cookbooks/"]
+    #   chef.add_recipe "base_pkg"
+    #   chef.add_recipe "apt"
+    #   chef.add_recipe "java"
+    #   chef.json = {
+    #     java: {
+    #       install_flavor: "openjdk",
+    #       jdk_version: "7",
+    #     }
+    #   }
+    # end
   end
 end

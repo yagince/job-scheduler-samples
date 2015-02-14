@@ -1,5 +1,9 @@
 # Azkaban Test
 
+## Azkaban version
+
+- `azkaban-solo-server-2.6.4`
+
 ## Installation
 
 ```

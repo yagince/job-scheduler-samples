@@ -18,6 +18,12 @@ vagrant up
 vagrant provision
 ```
 
-## Open Rundeck
+## Open Azkaban
 
 open `http://localhost:8081` in your browser
+
+- id : azkaban
+- pass: azkaban
+
+
+

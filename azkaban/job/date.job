@@ -1,0 +1,4 @@
+#date.job
+type=command
+dependencies=helloworld
+command=date
